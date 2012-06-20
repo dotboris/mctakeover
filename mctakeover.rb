@@ -6,12 +6,12 @@ require 'socket'
 load 'McConn.class.rb'
 
 # config
-TARGET_HOST = '2b2t.net'
+TARGET_HOST = 'localhost'
 TARGET_PORT = 25565
 DECOY_HOST = '127.0.0.1'
 DECOY_PORT = 6000
 LISTEN_PORT = 7000
-TAKEOVER_USER = 'BorisB'
+TAKEOVER_USER = 'Player'
 
 # start server
 puts 'Listening on port ' + LISTEN_PORT.to_s
