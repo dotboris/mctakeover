@@ -24,18 +24,18 @@ threads = []
 
 # start accepting connections
 loop do
-	threads << Thread::start(server.accept()) do |sock|
-		begin
-			puts 'Got connection from ' + sock.peeraddr(false)[2] + 
-				':' + sock.peeraddr(false)[1].to_s
-			connection = McConn.new(sock)
-			connection.run
-		rescue => e
-			puts 'Crashed :('
-			puts e.message
-			puts e.backtrace.inspect
-		ensure
-			sock.close
-		end
-	end
+  threads << Thread::start(server.accept()) do |sock|
+    begin
+      puts 'Got connection from ' + sock.peeraddr(false)[2] + 
+        ':' + sock.peeraddr(false)[1].to_s
+      connection = McConn.new(sock)
+      connection.run
+    rescue => e
+      puts 'Crashed :('
+      puts e.message
+      puts e.backtrace.inspect
+    ensure
+      sock.close
+    end
+  end
 end
