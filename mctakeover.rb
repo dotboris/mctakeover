@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
-# encoding: utf-8
 
-# deps
 require 'socket'
 load 'McConn.class.rb'
 
