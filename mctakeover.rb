@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'socket'
-load 'McConn.class.rb'
+require_relative 'mc_conn'
 
 # config
 TARGET_HOST = 'localhost'
