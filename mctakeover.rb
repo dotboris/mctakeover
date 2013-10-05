@@ -12,26 +12,26 @@ LISTEN_PORT = 7000
 TAKEOVER_USER = 'Player'
 
 # start server
-puts 'Listening on port ' + LISTEN_PORT.to_s
-puts 'Target: ' + TARGET_HOST + ':' + TARGET_PORT.to_s
-puts 'Decoy: ' + DECOY_HOST + ':' + DECOY_PORT.to_s
-server = TCPServer.new('', LISTEN_PORT)
+puts "Listening on port #{LISTEN_PORT}"
+puts "Target: #{TARGET_HOST}:#{TARGET_PORT}"
+puts "Decoy: #{DECOY_HOST}:#{DECOY_PORT}"
+server = TCPServer.new LISTEN_PORT
 
 # threads
 threads = []
 
 # start accepting connections
 loop do
-  threads << Thread::start(server.accept()) do |sock|
+  threads << Thread.start(server.accept) do |sock|
     begin
-      puts 'Got connection from ' + sock.peeraddr(false)[2] + 
-        ':' + sock.peeraddr(false)[1].to_s
-      connection = McConn.new(sock)
+      _, port, host = *sock.peeraddr(false)
+      puts "Got commection from #{host}:#{port}"
+      connection = McConn.new sock
       connection.run
     rescue => e
       puts 'Crashed :('
       puts e.message
-      puts e.backtrace.inspect
+      puts e.backtrace.join "\n\t"
     ensure
       sock.close
     end

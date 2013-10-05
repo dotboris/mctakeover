@@ -103,7 +103,7 @@ class McConn
 
       # start routing data to decoy server
       begin
-        Thread::new() do
+        Thread.new do
           loop do
             @dsock.sendmsg(@csock.recv(1000))
           end
